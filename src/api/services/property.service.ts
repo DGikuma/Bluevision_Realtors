@@ -6,7 +6,7 @@ import {
   CreatePropertyDTO,
   UpdatePropertyDTO 
 } from '@/types/property';
-import { mockProperties, mockPaginatedResponse } from '../mockdata';
+
 
 class PropertyService {
   private readonly basePath = '/properties';
