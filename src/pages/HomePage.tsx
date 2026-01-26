@@ -199,7 +199,7 @@ const HomePage = () => {
       <ContactSection />
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-700 text-white py-12">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
