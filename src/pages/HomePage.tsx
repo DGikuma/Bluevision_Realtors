@@ -242,15 +242,15 @@ const HomePage = () => {
               <ul className="space-y-3 text-gray-400">
                 <li className="flex items-center">
                   <MapPin className="w-4 h-4 mr-2" />
-                  <span>123 Real Estate Ave, New York, NY 10001</span>
+                  <span></span>
                 </li>
                 <li className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
-                  <span>(555) 123-4567</span>
+                  <span></span>
                 </li>
                 <li className="flex items-center">
                   <Mail className="w-4 h-4 mr-2" />
-                  <span>info@elitereality.com</span>
+                  <span></span>
                 </li>
               </ul>
             </div>
