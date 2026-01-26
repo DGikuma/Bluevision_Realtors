@@ -75,10 +75,10 @@ const NotFoundPage = () => {
             </p>
             <div className="space-y-2">
               <p className="text-gray-700">
-                <span className="font-medium">Phone:</span> (555) 123-4567
+                <span className="font-medium">Phone:</span> +254 711-387-303
               </p>
               <p className="text-gray-700">
-                <span className="font-medium">Email:</span> support@elitereality.com
+                <span className="font-medium">Email:</span>sales@bluevisionrealtors.com
               </p>
               <p className="text-gray-700">
                 <span className="font-medium">Hours:</span> Mon-Fri 9AM-6PM

@@ -49,14 +49,14 @@ const ContactPage = () => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: 'Call Us',
-      details: ['(555) 123-4567', '(555) 987-6543'],
-      description: 'Available 24/7 for urgent inquiries'
+      details: ['+254 711-387-303'],
+      
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email Us',
-      details: ['info@elitereality.com', 'support@elitereality.com'],
-      description: 'Response within 24 hours'
+      details: ['sales@bluevisionrealtors.com'],
+      
     },
     {
       icon: <MapPin className="w-6 h-6" />,

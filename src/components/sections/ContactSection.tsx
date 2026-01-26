@@ -56,8 +56,8 @@ const ContactSection = () => {
                 <div>
                   <h3 className="font-bold text-lg mb-1">Call Us</h3>
                   <p className="text-gray-600">Available 24/7 for emergencies</p>
-                  <a href="tel:+15551234567" className="text-blue-600 font-semibold text-lg">
-                    (555) 123-4567
+                  <a href="tel:+254711387303" className="text-blue-600 font-semibold text-lg">
+                    +254 711-387-303
                   </a>
                 </div>
               </div>
@@ -71,8 +71,8 @@ const ContactSection = () => {
                 <div>
                   <h3 className="font-bold text-lg mb-1">Email Us</h3>
                   <p className="text-gray-600">We'll respond within 24 hours</p>
-                  <a href="mailto:info@elitereality.com" className="text-blue-600 font-semibold">
-                    info@elitereality.com
+                  <a href="" className="text-blue-600 font-semibold">
+                    
                   </a>
                 </div>
               </div>
@@ -139,7 +139,7 @@ const ContactSection = () => {
                           onChange={handleChange}
                           required
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder="John Doe"
+                          placeholder=""
                         />
                       </div>
                       <div>
