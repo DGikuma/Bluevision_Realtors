@@ -56,7 +56,7 @@ export const mockProperties: Property[] = [
     status: 'for_sale',
     location: {
       address: '456 Skyline Ave',
-      city: 'New York',
+      city: 'Nairobí',
       state: 'NY',
       zipCode: '10001',
       coordinates: { lat: 40.7128, lng: -74.0060 },
