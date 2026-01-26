@@ -105,29 +105,7 @@ const NewNavbar = () => {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       {/* Top bar with contact info */}
-      <div className="bg-primary text-white py-2 text-xs">
-        <div className="container flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center space-x-4 mb-1 md:mb-0">
-            <div className="flex items-center">
-              <Phone className="w-3 h-3 mr-1 text-accent" />
-              <span>(555) 123-4567</span>
-            </div>
-            <div className="flex items-center">
-              <Mail className="w-3 h-3 mr-1 text-accent" />
-              <span>info@bluevisionrealtors.com</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center">
-              <MapPin className="w-3 h-3 mr-1 text-accent" />
-              <span>123 Bluevision Ave, New York</span>
-            </div>
-            <button className="bg-accent hover:bg-accent-dark text-white px-3 py-1 rounded text-xs font-medium transition-colors">
-              Schedule Tour
-            </button>
-          </div>
-        </div>
-      </div>
+      
 
       {/* Main navigation */}
       <nav className="py-3 bg-white">
