@@ -7,7 +7,7 @@ import {
   UpdatePropertyDTO 
 } from '@/types/property';
 // ADD THIS IMPORT
-import { mockProperties } from '../mockdata'; // Import mock data
+import { mockProperties } from '../mockData'; // Import mock data
 
 class PropertyService {
   private readonly basePath = '/properties';
