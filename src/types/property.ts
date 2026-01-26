@@ -1,3 +1,4 @@
+// src/types/property.ts
 export interface Property {
   id: string;
   title: string;
@@ -19,7 +20,6 @@ export interface Property {
   bedrooms: number;
   bathrooms: number;
   squareFeet: number;
-  lotSize?: number; // ADD THIS
   yearBuilt?: number;
   images: string[];
   broker?: {
@@ -35,14 +35,57 @@ export interface Property {
   isFeatured?: boolean;
   createdAt: string;
   updatedAt: string;
-  specs?: { // ADD THIS
-    beds: number;
-    baths: number;
-    sqft: number;
-    lotSize: number;
-    yearBuilt: number;
-    propertyType: string;
+}
+
+export interface PropertyFilters {
+  type?: string;
+  status?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  bedrooms?: number;
+  bathrooms?: number;
+  minSqft?: number;
+  maxSqft?: number;
+  location?: string;
+  city?: string;
+  state?: string;
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  isFeatured?: boolean;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
   };
 }
 
-// Keep the rest of the interfaces the same
+export interface CreatePropertyDTO {
+  title: string;
+  description: string;
+  price: number;
+  type: string;
+  status: string;
+  location: {
+    address: string;
+    city: string;
+    state: string;
+    zipCode: string;
+  };
+  bedrooms: number;
+  bathrooms: number;
+  squareFeet: number;
+  images: string[];
+}
+
+export interface UpdatePropertyDTO extends Partial<CreatePropertyDTO> {
+  isFavorite?: boolean;
+}
+
+// Re-export everything
+export * from './property';
