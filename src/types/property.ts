@@ -1,4 +1,3 @@
-// Base Property interface
 export interface Property {
   id: string;
   title: string;
@@ -6,7 +5,7 @@ export interface Property {
   description: string;
   price: number;
   type: string;
-  status: 'for_sale' | 'for_rent' | 'sold' | 'rented';
+  status: string;
   location: {
     address: string;
     city: string;
@@ -20,7 +19,6 @@ export interface Property {
   bedrooms: number;
   bathrooms: number;
   squareFeet: number;
-  lotSize?: number;
   yearBuilt?: number;
   images: string[];
   broker?: {
@@ -36,17 +34,8 @@ export interface Property {
   isFeatured?: boolean;
   createdAt: string;
   updatedAt: string;
-  specs?: {
-    beds: number;
-    baths: number;
-    sqft: number;
-    lotSize: number;
-    yearBuilt: number;
-    propertyType: string;
-  };
 }
 
-// Filter types
 export interface PropertyFilters {
   type?: string;
   status?: string;
@@ -61,11 +50,20 @@ export interface PropertyFilters {
   state?: string;
   page?: number;
   limit?: number;
-  sortBy?: 'price_asc' | 'price_desc' | 'newest' | 'oldest';
+  sortBy?: string;
   isFeatured?: boolean;
 }
 
-// DTOs for creating/updating properties
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
 export interface CreatePropertyDTO {
   title: string;
   description: string;
@@ -86,22 +84,4 @@ export interface CreatePropertyDTO {
 
 export interface UpdatePropertyDTO extends Partial<CreatePropertyDTO> {
   isFavorite?: boolean;
-}
-
-// Paginated response
-export interface PaginatedResponse<T> {
-  data: T[];
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  };
-}
-
-// Base entity
-export interface BaseEntity {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
 }
