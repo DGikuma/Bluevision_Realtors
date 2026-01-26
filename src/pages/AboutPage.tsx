@@ -1,13 +1,11 @@
 import React from 'react';
 import NewNavbar from '@/components/layout/NewNavbar';
 import { 
-  Award, 
+  
   Users, 
   Target, 
   Heart, 
-  CheckCircle, 
-  ArrowRight,
-  TrendingUp,
+  
   Shield
 } from 'lucide-react';
 
