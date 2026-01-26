@@ -17,10 +17,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     maximumFractionDigits: 0
   }).format(property.price);
 
-  // Use specs if available, otherwise use direct properties
-  const bedrooms = property.specs?.beds || property.bedrooms;
-  const bathrooms = property.specs?.baths || property.bathrooms;
-  const squareFeet = property.specs?.sqft || property.squareFeet;
+  // Use direct properties instead of specs
+  const bedrooms = property.bedrooms; // Changed from property.specs?.beds
+  const bathrooms = property.bathrooms; // Changed from property.specs?.baths
+  const squareFeet = property.squareFeet; // Changed from property.specs?.sqft
 
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
