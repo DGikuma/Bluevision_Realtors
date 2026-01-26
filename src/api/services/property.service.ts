@@ -6,7 +6,8 @@ import {
   CreatePropertyDTO,
   UpdatePropertyDTO 
 } from '@/types/property';
-
+// ADD THIS IMPORT
+import { mockProperties } from '../mockdata'; // Import mock data
 
 class PropertyService {
   private readonly basePath = '/properties';
@@ -35,7 +36,7 @@ class PropertyService {
     try {
       // For development, return mock data
       if (import.meta.env.DEV) {
-        const property = mockProperties.find(p => p.id === id);
+        const property = mockProperties.find((p: Property) => p.id === id);
         if (!property) throw new Error('Property not found');
         return property;
       }
@@ -77,7 +78,7 @@ class PropertyService {
       // For development, return mock data
       if (import.meta.env.DEV) {
         return mockProperties
-          .filter(p => p.id !== id)
+          .filter((p: Property) => p.id !== id)
           .slice(0, limit);
       }
 
@@ -89,7 +90,7 @@ class PropertyService {
       console.error(`Error fetching similar properties for ${id}:`, error);
       // Return mock data in case of error
       return mockProperties
-        .filter(p => p.id !== id)
+        .filter((p: Property) => p.id !== id)
         .slice(0, limit);
     }
   }
@@ -99,14 +100,14 @@ class PropertyService {
     try {
       // For development, return mock data
       if (import.meta.env.DEV) {
-        return mockProperties.filter(p => p.isFeatured);
+        return mockProperties.filter((p: Property) => p.isFeatured);
       }
 
       const response = await apiClient.get<Property[]>(`${this.basePath}/featured`);
       return response.data;
     } catch (error) {
       console.error('Error fetching featured properties:', error);
-      return mockProperties.filter(p => p.isFeatured);
+      return mockProperties.filter((p: Property) => p.isFeatured);
     }
   }
 
@@ -134,43 +135,43 @@ class PropertyService {
 
     if (filters) {
       if (filters.type) {
-        filtered = filtered.filter(p => p.type === filters.type);
+        filtered = filtered.filter((p: Property) => p.type === filters!.type);
       }
       if (filters.status) {
-        filtered = filtered.filter(p => p.status === filters.status);
+        filtered = filtered.filter((p: Property) => p.status === filters!.status);
       }
       if (filters.minPrice) {
-        filtered = filtered.filter(p => p.price >= filters.minPrice!);
+        filtered = filtered.filter((p: Property) => p.price >= filters!.minPrice!);
       }
       if (filters.maxPrice) {
-        filtered = filtered.filter(p => p.price <= filters.maxPrice!);
+        filtered = filtered.filter((p: Property) => p.price <= filters!.maxPrice!);
       }
       if (filters.bedrooms) {
-        filtered = filtered.filter(p => p.bedrooms >= filters.bedrooms!);
+        filtered = filtered.filter((p: Property) => p.bedrooms >= filters!.bedrooms!);
       }
       if (filters.bathrooms) {
-        filtered = filtered.filter(p => p.bathrooms >= filters.bathrooms!);
+        filtered = filtered.filter((p: Property) => p.bathrooms >= filters!.bathrooms!);
       }
       if (filters.minSqft) {
-        filtered = filtered.filter(p => p.squareFeet >= filters.minSqft!);
+        filtered = filtered.filter((p: Property) => p.squareFeet >= filters!.minSqft!);
       }
       if (filters.maxSqft) {
-        filtered = filtered.filter(p => p.squareFeet <= filters.maxSqft!);
+        filtered = filtered.filter((p: Property) => p.squareFeet <= filters!.maxSqft!);
       }
       if (filters.location) {
-        filtered = filtered.filter(p => 
-          p.location.city.toLowerCase().includes(filters.location!.toLowerCase()) ||
-          p.location.state.toLowerCase().includes(filters.location!.toLowerCase())
+        filtered = filtered.filter((p: Property) => 
+          p.location.city.toLowerCase().includes(filters!.location!.toLowerCase()) ||
+          p.location.state.toLowerCase().includes(filters!.location!.toLowerCase())
         );
       }
       if (filters.city) {
-        filtered = filtered.filter(p => 
-          p.location.city.toLowerCase().includes(filters.city!.toLowerCase())
+        filtered = filtered.filter((p: Property) => 
+          p.location.city.toLowerCase().includes(filters!.city!.toLowerCase())
         );
       }
       if (filters.state) {
-        filtered = filtered.filter(p => 
-          p.location.state.toLowerCase().includes(filters.state!.toLowerCase())
+        filtered = filtered.filter((p: Property) => 
+          p.location.state.toLowerCase().includes(filters!.state!.toLowerCase())
         );
       }
     }
@@ -198,7 +199,7 @@ class PropertyService {
     // Apply search query
     if (query) {
       const searchTerms = query.toLowerCase().split(' ');
-      results = results.filter(property => {
+      results = results.filter((property: Property) => {
         const searchText = `
           ${property.title.toLowerCase()}
           ${property.description.toLowerCase()}
@@ -214,13 +215,13 @@ class PropertyService {
     // Apply filters
     if (filters) {
       if (filters.type) {
-        results = results.filter(p => p.type === filters.type);
+        results = results.filter((p: Property) => p.type === filters!.type);
       }
       if (filters.minPrice) {
-        results = results.filter(p => p.price >= filters.minPrice!);
+        results = results.filter((p: Property) => p.price >= filters!.minPrice!);
       }
       if (filters.maxPrice) {
-        results = results.filter(p => p.price <= filters.maxPrice!);
+        results = results.filter((p: Property) => p.price <= filters!.maxPrice!);
       }
     }
 
