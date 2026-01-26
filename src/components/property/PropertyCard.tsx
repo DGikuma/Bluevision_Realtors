@@ -17,7 +17,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     maximumFractionDigits: 0
   }).format(property.price);
 
-  // Use either specs object or direct properties
+  // Use specs if available, otherwise use direct properties
   const bedrooms = property.specs?.beds || property.bedrooms;
   const bathrooms = property.specs?.baths || property.bathrooms;
   const squareFeet = property.specs?.sqft || property.squareFeet;
