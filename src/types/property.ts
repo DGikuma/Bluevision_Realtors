@@ -1,4 +1,3 @@
-// src/types/property.ts
 export interface Property {
   id: string;
   title: string;
@@ -20,6 +19,7 @@ export interface Property {
   bedrooms: number;
   bathrooms: number;
   squareFeet: number;
+  lotSize?: number; // ADD THIS
   yearBuilt?: number;
   images: string[];
   broker?: {
@@ -35,8 +35,17 @@ export interface Property {
   isFeatured?: boolean;
   createdAt: string;
   updatedAt: string;
+  specs?: { // ADD THIS
+    beds: number;
+    baths: number;
+    sqft: number;
+    lotSize: number;
+    yearBuilt: number;
+    propertyType: string;
+  };
 }
 
+// Keep the rest of the interfaces...
 export interface PropertyFilters {
   type?: string;
   status?: string;
@@ -86,6 +95,3 @@ export interface CreatePropertyDTO {
 export interface UpdatePropertyDTO extends Partial<CreatePropertyDTO> {
   isFavorite?: boolean;
 }
-
-// Re-export everything
-export * from './property';
