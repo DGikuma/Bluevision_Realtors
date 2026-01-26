@@ -408,7 +408,7 @@ const ListingsPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+      <section className="py-20 bg-gradient-to-r from-blue-700 to-blue-700 text-white">
         <div className="container text-center">
           <h2 className="text-4xl font-bold mb-6">Can't Find What You're Looking For?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">

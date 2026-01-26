@@ -104,11 +104,31 @@ const NewNavbar = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
-      {/* Top bar with contact info */}
-      
+      {/* Top bar with contact info - KEEP ORIGINAL */}
+      <div className="bg-primary text-white py-2 text-xs">
+        <div className="container flex flex-col md:flex-row justify-between items-center">
+          <div className="flex items-center space-x-4 mb-1 md:mb-0">
+            <div className="flex items-center">
+              <Phone className="w-3 h-3 mr-1 text-accent" />
+              <span>+254 711-387-303</span>
+            </div>
+            <div className="flex items-center">
+              <Mail className="w-3 h-3 mr-1 text-accent" />
+              <span>sales@bluevisionrealtors.com</span>
+            </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center">
+              <MapPin className="w-3 h-3 mr-1 text-accent" />
+              <span>Equity Bank Building  | 1st Floor  | Kilimani</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      {/* Main navigation */}
-      <nav className="py-3 bg-white">
+      {/* WHITE MAIN NAVIGATION - REDUCED THICKNESS BY 5% */}
+      {/* Changed from py-3 to py-2 (reduced vertical padding) */}
+      <nav className="py-2 bg-white"> {/* ⬅️ CHANGED THIS LINE */}
         <div className="container flex justify-between items-center">
           {/* Logo */}
           <Logo size="md" variant="dark" />
@@ -127,11 +147,12 @@ const NewNavbar = () => {
                       <Link
                         to={item.path}
                         onClick={handleServicesClick}
-                        className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-colors ${
-                          isActive(item.path) || servicesOpen
-                            ? 'text-accent bg-accent/10 font-medium' 
-                            : 'text-gray-700 hover:text-accent hover:bg-neutral-light'
-                        }`}
+                        className={`flex items-center space-x-1 px-3 py-1.5 rounded-lg transition-colors`}
+                        style={{
+                          backgroundColor: isActive(item.path) || servicesOpen ? 'rgba(var(--accent), 0.1)' : 'transparent',
+                          color: isActive(item.path) || servicesOpen ? 'var(--accent)' : 'rgb(55, 65, 81)',
+                          fontWeight: isActive(item.path) || servicesOpen ? '500' : '400'
+                        }}
                       >
                         <span>{item.name}</span>
                         <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
@@ -161,11 +182,12 @@ const NewNavbar = () => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`px-3 py-2 rounded-lg transition-colors ${
-                      isActive(item.path) 
-                        ? 'text-accent bg-accent/10 font-medium' 
-                        : 'text-gray-700 hover:text-accent hover:bg-neutral-light'
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg transition-colors`} 
+                    style={{
+                      backgroundColor: isActive(item.path) ? 'rgba(var(--accent), 0.1)' : 'transparent',
+                      color: isActive(item.path) ? 'var(--accent)' : 'rgb(55, 65, 81)',
+                      fontWeight: isActive(item.path) ? '500' : '400'
+                    }}
                   >
                     {item.name}
                   </Link>
@@ -173,10 +195,10 @@ const NewNavbar = () => {
               </div>
             ))}
             
-            {/* CTA Button */}
+            {/* CTA Button - Slightly reduced padding */}
             <Link
               to="/contact"
-              className="btn-primary"
+              className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-lg font-medium transition-colors" 
             >
               Get Free Consultation
             </Link>

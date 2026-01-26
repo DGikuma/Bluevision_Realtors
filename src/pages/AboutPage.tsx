@@ -46,11 +46,11 @@ const AboutPage = () => {
       <NewNavbar />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
+      <section className="relative py-20 bg-gradient-to-r from-blue-600 to-blue-600 text-white">
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="container relative">
           <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">About Elite Reality</h1>
+            <h1 className="text-5xl :text-6xl font-bold mb-9">About </h1>
             <p className="text-xl text-blue-100 mb-8">
               For over 15 years, we've been transforming real estate dreams into reality with 
               unparalleled expertise, integrity, and personalized service.

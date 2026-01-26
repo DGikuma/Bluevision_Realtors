@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search, Home, Shield, TrendingUp } from 'lucide-react';
-import { LogoHorizontal } from '@/components/layout/Logo';
+import  LogoHorizontal  from '@/components/layout/Logo';
 
 const HeroSection = () => {
   return (
@@ -18,12 +18,11 @@ const HeroSection = () => {
       <div className="container relative z-10 text-white">
         <div className="max-w-3xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            Your Vision, Our Blueprint
+ 
             <span className="block text-accent mt-2">Find Your Perfect Property</span>
           </h1>
           <p className="text-lg text-neutral mb-8">
-            Bluevision Realtors connects you with premium properties and expert agents. 
-            Experience seamless real estate transactions with our professional team.
+            Real Estate Company dealing in Land and Property Development in Kenya
           </p>
 
           {/* Search Bar */}

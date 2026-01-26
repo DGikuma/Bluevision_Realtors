@@ -96,7 +96,7 @@ const ContactPage = () => {
       <NewNavbar />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
+      <section className="relative py-20 bg-gradient-to-r from-blue-500 to-blue-500 text-white">
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="container relative">
           <div className="max-w-3xl">
@@ -173,7 +173,7 @@ const ContactPage = () => {
                           onChange={handleChange}
                           required
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder="John Doe"
+                          placeholder=""
                         />
                       </div>
                       <div>
@@ -203,7 +203,7 @@ const ContactPage = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder="(555) 123-4567"
+                          placeholder=""
                         />
                       </div>
                       <div>
@@ -319,11 +319,11 @@ const ContactPage = () => {
                   Need immediate help with a property issue or urgent inquiry?
                 </p>
                 <a
-                  href="tel:+15551234567"
+                  href="tel:+254 711-387-303"
                   className="inline-flex items-center bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold"
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  Call Now: (555) 123-4567
+                  Call Now: +254 711-387-303
                 </a>
               </div>
 
@@ -378,11 +378,11 @@ const ContactPage = () => {
             <div className="h-96 relative flex items-center justify-center">
               <div className="text-center">
                 <MapPin className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold mb-2">Elite Reality Headquarters</h3>
-                <p className="text-gray-600 text-lg">123 Real Estate Avenue</p>
-                <p className="text-gray-600 text-lg">New York, NY 10001</p>
+                <h3 className="text-2xl font-bold mb-2">BlueVision Realtors Head Office</h3>
+                <p className="text-gray-600 text-lg">Equity Bank Building</p>
+                <p className="text-gray-600 text-lg">1st Floor, Kilimani</p>
                 <a 
-                  href="https://maps.google.com/?q=123+Real+Estate+Avenue+New+York+NY+10001" 
+                  href="https://maps.app.goo.gl/8vZ2ZZhpJWDkVGw96"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-block mt-6 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold"

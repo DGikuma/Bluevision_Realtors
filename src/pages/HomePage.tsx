@@ -199,7 +199,7 @@ const HomePage = () => {
       <ContactSection />
 
       {/* Footer */}
-      <footer className="bg-gray-700 text-white py-12">
+      <footer className="bg-gray-500 text-white py-12">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -208,11 +208,11 @@ const HomePage = () => {
                   <span className="font-bold text-xl">ER</span>
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold">Elite Reality</h2>
+                  <h2 className="text-xl font-bold">BlueVision Realtors Limited</h2>
                   <p className="text-sm text-gray-400">Premium Real Estate Solutions</p>
                 </div>
               </div>
-              <p className="text-gray-400">
+              <p className="text-gray-900">
                 Your trusted partner for buying, selling, and managing premium real estate properties.
               </p>
             </div>
@@ -246,18 +246,18 @@ const HomePage = () => {
                 </li>
                 <li className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
-                  <span></span>
+                  <span>+254 711-387-303</span>
                 </li>
                 <li className="flex items-center">
                   <Mail className="w-4 h-4 mr-2" />
-                  <span></span>
+                  <span>info@bluevisionrealtors.com</span>
                 </li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Elite Reality. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} BlueVision Realtors Limited. All rights reserved.</p>
           </div>
         </div>
       </footer>
