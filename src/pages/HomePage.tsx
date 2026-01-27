@@ -1,9 +1,10 @@
 import React from 'react';
 import NewNavbar from '@/components/layout/NewNavbar';
+import Logo from '@/components/layout/Logo';
 import { 
   Home, Shield, TrendingUp, Users, Star, Award, CheckCircle,
   ArrowRight, MapPin, Mail, Phone, Target, Clock, Building2,
-  Heart, ChevronRight
+  Heart, ChevronRight, Facebook, Twitter, MessageCircle, Music2Icon
 } from 'lucide-react';
 
 const HomePage = () => {
@@ -67,20 +68,16 @@ const HomePage = () => {
       <NewNavbar />
       
       {/* IMMERSIVE HERO SECTION */}
-      {/* Increased height to 85vh to stop the "zoomed out" feel */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image - Cleaned up filters for crisper look */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
             alt="Luxury Real Estate"
             className="w-full h-full object-cover"
           />
-          {/* Enhanced Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-900/80 to-blue-800/60 mix-blend-multiply" />
         </div>
 
-        {/* Content */}
         <div className="container relative z-10 px-4 pt-20">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-full text-blue-100 text-sm font-semibold mb-8">
@@ -88,7 +85,6 @@ const HomePage = () => {
               #1 Real Estate Agency in Nairobi
             </div>
             
-            {/* Larger Typography for impact */}
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight tracking-tight">
               Find Your Dream Property in{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">
@@ -356,23 +352,58 @@ const HomePage = () => {
             {/* Brand */}
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/50">
-                  <span className="font-bold text-xl">BV</span>
-                </div>
+                <Logo size="md" variant="dark" />
                 <div>
-                  <h2 className="text-xl font-bold tracking-tight">BlueVision</h2>
-                  <p className="text-xs text-blue-400 uppercase tracking-wider">Realtors</p>
+                 
                 </div>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed mb-6">
                 Your trusted partner for premium real estate services in Nairobi. 
                 Expert guidance for buying, selling, and property management.
               </p>
+              
+              {/* Social Media Icons */}
               <div className="flex space-x-4">
-                {/* Social placeholders */}
-                {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-gray-800 hover:bg-blue-600 transition-colors cursor-pointer"></div>
-                ))}
+                <a 
+                  href="https://facebook.com/bluevisionrealtors" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-[#1877F2] rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                  aria-label="Follow us on Facebook"
+                  title="Follow us on Facebook"
+                >
+                  <Facebook className="w-5 h-5 text-white" />
+                </a>
+                <a 
+                  href="https://twitter.com/bluevisionrealtors" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                  aria-label="Follow us on Twitter/X"
+                  title="Follow us on Twitter/X"
+                >
+                  <Twitter className="w-5 h-5 text-white" />
+                </a>
+                <a 
+                  href="https://wa.me/254711387303" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-[#25D366] rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                  aria-label="Chat with us on WhatsApp"
+                  title="Chat with us on WhatsApp"
+                >
+                  <MessageCircle className="w-5 h-5 text-white" />
+                </a>
+                <a 
+                  href="https://tiktok.com/@bluevisionrealtors" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                  aria-label="Follow us on TikTok"
+                  title="Follow us on TikTok"
+                >
+                  <Music2Icon className="w-5 h-5 text-white" />
+                </a>
               </div>
             </div>
 
@@ -382,7 +413,7 @@ const HomePage = () => {
               <ul className="space-y-4">
                 {['Home', 'About Us', 'Services', 'Listings', 'Agents', 'Contact'].map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">
+                    <a href={`/${item === 'Home' ? '' : item.toLowerCase().replace(' ', '-')}`} className="text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">
                       {item}
                     </a>
                   </li>
@@ -396,7 +427,7 @@ const HomePage = () => {
               <ul className="space-y-4">
                 {['Property Buying', 'Property Selling', 'Property Management', 'Investment Consultation'].map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">
+                    <a href="/services" className="text-gray-400 hover:text-white hover:translate-x-1 transition-all inline-block">
                       {item}
                     </a>
                   </li>
@@ -418,8 +449,8 @@ const HomePage = () => {
                 </li>
                 <li className="flex items-center">
                   <Mail className="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" />
-                  <span className="text-gray-400"> info.bluevisionrealtors@gmail.com</span>
-                </li>m
+                  <span className="text-gray-400">info.bluevisionrealtors@gmail.com</span>
+                </li>
               </ul>
             </div>
           </div>

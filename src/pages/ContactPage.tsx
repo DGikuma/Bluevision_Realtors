@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Logo from '@/components/layout/Logo';
 import NewNavbar from '@/components/layout/NewNavbar';
 import { 
   Phone, 
@@ -10,6 +11,10 @@ import {
   MessageSquare,
   Calendar,
   Headphones,
+  Music2Icon,
+  Facebook,
+  MessageCircle,
+  Twitter,
   Star,
   ChevronRight
 } from 'lucide-react';
@@ -519,18 +524,58 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/50">
-                  <span className="font-bold text-xl">BV</span>
-                </div>
+                <Logo size="md" variant="dark" />
                 <div>
-                  <h2 className="text-xl font-bold tracking-tight">BlueVision</h2>
-                  <p className="text-xs text-blue-400 uppercase tracking-wider">Realtors</p>
+                  
                 </div>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Your trusted partner for premium real estate services in Nairobi.
               </p>
             </div>
+            {/* Social Media Icons */}
+              <div className="flex space-x-4">
+                <a 
+                  href="https://facebook.com/bluevisionrealtors" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-[#1877F2] rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                  aria-label="Follow us on Facebook"
+                  title="Follow us on Facebook"
+                >
+                  <Facebook className="w-5 h-5 text-white" />
+                </a>
+                <a 
+                  href="https://twitter.com/bluevisionrealtors" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                  aria-label="Follow us on Twitter/X"
+                  title="Follow us on Twitter/X"
+                >
+                  <Twitter className="w-5 h-5 text-white" />
+                </a>
+                <a 
+                  href="https://wa.me/254711387303" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-[#25D366] rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                  aria-label="Chat with us on WhatsApp"
+                  title="Chat with us on WhatsApp"
+                >
+                  <MessageCircle className="w-5 h-5 text-white" />
+                </a>
+                <a 
+                  href="https://tiktok.com/@bluevisionrealtors" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 hover:bg-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                  aria-label="Follow us on TikTok"
+                  title="Follow us on TikTok"
+                >
+                  <Music2Icon className="w-5 h-5 text-white" />
+                </a>
+              </div>
 
             <div>
               <h3 className="text-lg font-bold mb-6 text-white">Quick Links</h3>
