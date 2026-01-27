@@ -11,6 +11,7 @@ import {
   Calendar,
   Headphones
 } from 'lucide-react';
+import emailjs from 'emailjs-com';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -22,22 +23,52 @@ const ContactPage = () => {
     preferredContact: 'email'
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-        preferredContact: 'email'
+    setIsLoading(true);
+    setError('');
+
+    const serviceID = 'service_ffg1tpr';
+    const templateID = 'template_uyudjgi';
+    const userID = 'El77e_qsXi51y6bwm';
+
+    try {
+      emailjs.init(userID);
+      await emailjs.send(serviceID, templateID, {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+        preferred_contact: formData.preferredContact,
+        to_email: 'info.bluevisionrealtors@gmail.com',
+        reply_to: formData.email,
       });
-    }, 3000);
+
+      console.log('Email sent successfully!');
+      setIsSubmitted(true);
+      
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+          preferredContact: 'email'
+        });
+      }, 5000);
+
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      setError('Failed to send message. Please try again or contact us directly at info@bluevisionrealtors.com');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -47,25 +78,23 @@ const ContactPage = () => {
 
   const contactMethods = [
     {
-      icon: <Phone className="w-6 h-6" />,
+      icon: <Phone className="w-7 h-7" />,
       title: 'Call Us',
       details: ['+254 711-387-303'],
-      
     },
     {
-      icon: <Mail className="w-6 h-6" />,
+      icon: <Mail className="w-7 h-7" />,
       title: 'Email Us',
-      details: ['sales@bluevisionrealtors.com'],
-      
+      details: ['info.bluevisionrealtors@gmail.com'],
     },
     {
-      icon: <MapPin className="w-6 h-6" />,
+      icon: <MapPin className="w-7 h-7" />,
       title: 'Visit Us',
-      details: ['123 Real Estate Avenue', 'New York, NY 10001'],
+      details: ['Equity Bank Building', '1st Floor, Kilimani'],
       description: 'Office hours: Mon-Fri 9AM-6PM'
     },
     {
-      icon: <MessageSquare className="w-6 h-6" />,
+      icon: <MessageSquare className="w-7 h-7" />,
       title: 'Live Chat',
       details: ['Available on website', 'Quick response'],
       description: 'Chat with our support team'
@@ -92,39 +121,66 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <NewNavbar />
 
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-blue-500 to-blue-500 text-white">
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="container relative">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Contact Us</h1>
-            <p className="text-xl text-blue-100 mb-8">
-              Get in touch with our team of real estate experts. We're here to answer your questions 
-              and help you with all your property needs.
+      {/* Hero Section - Clean & Impactful */}
+      <section className="relative min-h-[75vh] flex items-center justify-center bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-blue-800/40 to-blue-900/50"></div>
+        
+        <div className="container max-w-7xl mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+              Get in Touch
+            </h1>
+            <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-2xl mx-auto">
+              Connect with Nairobi's premier real estate experts today
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="#contact-form" 
+                className="bg-white text-blue-900 hover:bg-blue-50 px-8 py-4 rounded-xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:-translate-y-1"
+              >
+                Send Message
+              </a>
+              <a 
+                href="tel:+254711387303" 
+                className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300"
+              >
+                Call Now
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Methods */}
       <section className="py-20 bg-white">
-        <div className="container">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-blue-900">
+              How to Reach Us
+            </h2>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactMethods.map((method, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-xl transition-shadow">
-                <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <div 
+                key={index} 
+                className="bg-white rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-blue-100"
+              >
+                <div className="bg-blue-100 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6">
                   {method.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3">{method.title}</h3>
-                <div className="space-y-1 mb-3">
+                <h3 className="text-2xl font-bold mb-4 text-blue-900">{method.title}</h3>
+                <div className="space-y-2 mb-4">
                   {method.details.map((detail, idx) => (
-                    <div key={idx} className="text-gray-600">{detail}</div>
+                    <div key={idx} className="text-blue-700 text-lg">{detail}</div>
                   ))}
                 </div>
-                <p className="text-sm text-gray-500">{method.description}</p>
+                {method.description && (
+                  <p className="text-sm text-blue-600">{method.description}</p>
+                )}
               </div>
             ))}
           </div>
@@ -132,25 +188,33 @@ const ContactPage = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-20 bg-gray-50">
-        <div className="container">
+      <section id="contact-form" className="py-20 bg-gray-50">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold mb-4">Send Us a Message</h2>
-                  <p className="text-gray-600">
-                    Fill out the form below and we'll get back to you as soon as possible.
+              <div className="bg-white rounded-2xl shadow-xl p-10">
+                <div className="text-center mb-10">
+                  <h2 className="text-4xl font-bold mb-4 text-blue-900">
+                    Send Us a Message
+                  </h2>
+                  <p className="text-lg text-blue-600">
+                    We'll get back to you within 24 hours
                   </p>
                 </div>
+
+                {error && (
+                  <div className="mb-8 p-6 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
+                    <p className="text-red-700 font-medium">{error}</p>
+                  </div>
+                )}
 
                 {isSubmitted ? (
                   <div className="text-center py-12">
                     <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold mb-2">Message Sent Successfully!</h3>
+                    <h3 className="text-2xl font-bold mb-2 text-blue-900">Message Sent Successfully!</h3>
                     <p className="text-gray-600 mb-6">
-                      Thank you for contacting Elite Reality. Our team will respond within 24 hours.
+                      Thank you for contacting BlueVision Realtors. Our team will respond within 24 hours.
                     </p>
                     <button
                       onClick={() => setIsSubmitted(false)}
@@ -160,7 +224,7 @@ const ContactPage = () => {
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -172,8 +236,8 @@ const ContactPage = () => {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder=""
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                          placeholder="Your Name"
                         />
                       </div>
                       <div>
@@ -186,7 +250,7 @@ const ContactPage = () => {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
                           placeholder="you@example.com"
                         />
                       </div>
@@ -202,8 +266,8 @@ const ContactPage = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder=""
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                          placeholder="+254 XXX XXX XXX"
                         />
                       </div>
                       <div>
@@ -215,7 +279,7 @@ const ContactPage = () => {
                           value={formData.subject}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg bg-white"
                         >
                           <option value="">Select a subject</option>
                           <option value="buying">Buying a Property</option>
@@ -229,31 +293,31 @@ const ContactPage = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
                         Preferred Contact Method
                       </label>
-                      <div className="flex space-x-4">
-                        <label className="flex items-center">
+                      <div className="flex space-x-6">
+                        <label className="flex items-center space-x-2">
                           <input
                             type="radio"
                             name="preferredContact"
                             value="email"
                             checked={formData.preferredContact === 'email'}
                             onChange={handleChange}
-                            className="mr-2"
+                            className="w-5 h-5"
                           />
-                          <span>Email</span>
+                          <span className="text-lg">Email</span>
                         </label>
-                        <label className="flex items-center">
+                        <label className="flex items-center space-x-2">
                           <input
                             type="radio"
                             name="preferredContact"
                             value="phone"
                             checked={formData.preferredContact === 'phone'}
                             onChange={handleChange}
-                            className="mr-2"
+                            className="w-5 h-5"
                           />
-                          <span>Phone</span>
+                          <span className="text-lg">Phone</span>
                         </label>
                       </div>
                     </div>
@@ -268,43 +332,56 @@ const ContactPage = () => {
                         onChange={handleChange}
                         required
                         rows={6}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
                         placeholder="Please describe your inquiry in detail..."
                       ></textarea>
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold flex items-center justify-center transition-colors shadow-md hover:shadow-lg"
+                      disabled={isLoading}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold text-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <Send className="w-5 h-5 mr-2" />
-                      Send Message
+                      {isLoading ? (
+                        <>
+                          <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2" />
+                          Send Message
+                        </>
+                      )}
                     </button>
                   </form>
                 )}
               </div>
             </div>
 
-            {/* Contact Info */}
+            {/* Contact Info Sidebar */}
             <div className="space-y-8">
               {/* Office Hours */}
               <div className="bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-6 flex items-center">
+                <h3 className="text-xl font-bold mb-6 flex items-center text-blue-900">
                   <Clock className="w-5 h-5 mr-2" />
                   Office Hours
                 </h3>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Monday - Friday</span>
-                    <span className="font-medium">9:00 AM - 6:00 PM</span>
+                    <span className="font-medium text-blue-900">9:00 AM - 6:00 PM</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Saturday</span>
-                    <span className="font-medium">10:00 AM - 4:00 PM</span>
+                    <span className="font-medium text-blue-900">10:00 AM - 4:00 PM</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Sunday</span>
-                    <span className="font-medium">By Appointment</span>
+                    <span className="font-medium text-blue-900">By Appointment</span>
                   </div>
                 </div>
               </div>
@@ -315,11 +392,11 @@ const ContactPage = () => {
                   <Headphones className="w-5 h-5 mr-2" />
                   Urgent Assistance
                 </h3>
-                <p className="mb-4">
-                  Need immediate help with a property issue or urgent inquiry?
+                <p className="mb-4 text-blue-100">
+                  Need immediate help with a property issue?
                 </p>
                 <a
-                  href="tel:+254 711-387-303"
+                  href="tel:+254711387303"
                   className="inline-flex items-center bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold"
                 >
                   <Phone className="w-5 h-5 mr-2" />
@@ -329,15 +406,15 @@ const ContactPage = () => {
 
               {/* Schedule Consultation */}
               <div className="bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-6 flex items-center">
+                <h3 className="text-xl font-bold mb-6 flex items-center text-blue-900">
                   <Calendar className="w-5 h-5 mr-2" />
                   Book a Consultation
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Schedule a free 30-minute consultation with one of our real estate experts.
+                  Schedule a free 30-minute consultation with our experts.
                 </p>
                 <a
-                  href="/schedule"
+                  href="/contact"
                   className="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold"
                 >
                   Schedule Now
@@ -346,15 +423,15 @@ const ContactPage = () => {
 
               {/* FAQ Preview */}
               <div className="bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-6">Frequently Asked Questions</h3>
+                <h3 className="text-xl font-bold mb-6 text-blue-900">Frequently Asked Questions</h3>
                 <div className="space-y-4">
                   {faqs.slice(0, 2).map((faq, index) => (
                     <div key={index}>
-                      <h4 className="font-medium mb-2">{faq.question}</h4>
+                      <h4 className="font-medium mb-2 text-blue-800">{faq.question}</h4>
                       <p className="text-sm text-gray-600">{faq.answer}</p>
                     </div>
                   ))}
-                  <a href="/faq" className="text-blue-600 hover:text-blue-700 font-medium">
+                  <a href="/contact" className="text-blue-600 hover:text-blue-700 font-medium">
                     View all FAQs →
                   </a>
                 </div>
@@ -366,10 +443,10 @@ const ContactPage = () => {
 
       {/* Map Section */}
       <section className="py-20 bg-white">
-        <div className="container">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Visit Our Office</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold mb-4 text-blue-900">Visit Our Office</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
               Stop by our main office for an in-person consultation or to meet our team.
             </p>
           </div>
@@ -385,12 +462,35 @@ const ContactPage = () => {
                   href="https://maps.app.goo.gl/8vZ2ZZhpJWDkVGw96"
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-block mt-6 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold"
+                  className="inline-block mt-6 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg"
                 >
                   Get Directions
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 bg-blue-600">
+        <div className="container max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6 text-white">
+            Ready to find your dream property?
+          </h2>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="#contact-form" 
+              className="bg-white text-blue-900 hover:bg-blue-50 px-8 py-3 rounded-lg font-semibold text-lg"
+            >
+              Contact Us Today
+            </a>
+            <a 
+              href="tel:+254711387303" 
+              className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-lg font-semibold text-lg"
+            >
+              Call: +254 711-387-303
+            </a>
           </div>
         </div>
       </section>
