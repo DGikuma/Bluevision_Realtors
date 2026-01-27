@@ -78,7 +78,7 @@ const NotFoundPage = () => {
                 <span className="font-medium">Phone:</span> +254 711-387-303
               </p>
               <p className="text-gray-700">
-                <span className="font-medium">Email:</span>sales@bluevisionrealtors.com
+                <span className="font-medium">Email:</span> info.bluevisionrealtors@gmail.com
               </p>
               <p className="text-gray-700">
                 <span className="font-medium">Hours:</span> Mon-Fri 9AM-6PM

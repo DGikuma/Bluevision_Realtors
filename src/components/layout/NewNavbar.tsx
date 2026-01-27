@@ -114,7 +114,7 @@ const NewNavbar = () => {
             </div>
             <div className="flex items-center">
               <Mail className="w-3 h-3 mr-1 text-accent" />
-              <span>sales@bluevisionrealtors.com</span>
+              <span> info.bluevisionrealtors@gmail.com</span>
             </div>
           </div>
           <div className="flex items-center space-x-4">

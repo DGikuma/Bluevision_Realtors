@@ -418,8 +418,8 @@ const HomePage = () => {
                 </li>
                 <li className="flex items-center">
                   <Mail className="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" />
-                  <span className="text-gray-400">sales@bluevisionrealtors.com</span>
-                </li>
+                  <span className="text-gray-400"> info.bluevisionrealtors@gmail.com</span>
+                </li>m
               </ul>
             </div>
           </div>
