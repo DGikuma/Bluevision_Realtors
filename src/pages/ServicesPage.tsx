@@ -124,13 +124,7 @@ const ServicesPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      {/* Modern Glass Navbar */}
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <div className="absolute inset-0 bg-white/90 backdrop-blur-md border-b border-blue-100"></div>
-        <div className="relative">
-          <NewNavbar />
-        </div>
-      </div>
+      <NewNavbar />
 
       {/* IMMERSIVE HERO SECTION */}
       <section className="relative min-h-[85vh] pt-20 flex items-center justify-center overflow-hidden">
