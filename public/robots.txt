@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+
+Sitemap: https://bluevisionrealtorsltd.com/sitemap.xml
+Host: https://bluevisionrealtorsltd.com
