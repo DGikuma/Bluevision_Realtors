@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Phone, Mail, MapPin, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, Mail, MapPin, ChevronDown, MessageCircle } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
@@ -24,15 +24,27 @@ const NewNavbar = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
 
+  // WhatsApp numbers (formatted without spaces or special characters for URL)
+  const whatsappNumbers = {
+    ke: '254711387303', // Kenya number
+    uk: '447397549590'  // UK number
+  };
+
+  // WhatsApp message templates
+  const whatsappMessages = {
+    ke: "Hello%20Blue%20Vision%20Realtors!%20I%20saw%20your%20website%20and%20would%20like%20more%20information%20about%20your%20services.",
+    uk: "Hello%20Blue%20Vision%20Realtors!%20I%20saw%20your%20website%20and%20would%20like%20more%20information%20about%20your%20services."
+  };
+
   // Detect if it's mobile
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 1024); // lg breakpoint
     };
-    
+
     checkIfMobile();
     window.addEventListener('resize', checkIfMobile);
-    
+
     // Close dropdown when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -41,7 +53,7 @@ const NewNavbar = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    
+
     return () => {
       window.removeEventListener('resize', checkIfMobile);
       document.removeEventListener('mousedown', handleClickOutside);
@@ -57,8 +69,8 @@ const NewNavbar = () => {
   const navItems: NavItem[] = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { 
-      name: 'Services', 
+    {
+      name: 'Services',
       path: '/services',
       dropdown: [
         { name: 'Property Buying', path: '/services' },
@@ -128,21 +140,59 @@ const NewNavbar = () => {
       {/* Top bar with contact info */}
       <div className="bg-primary text-white py-2 text-xs">
         <div className="container flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center space-x-4 mb-1 md:mb-0">
-            <div className="flex items-center">
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-1 md:mb-0">
+            {/* Phone - Now clickable */}
+            <a
+              href="tel:+254711387303"
+              className="flex items-center hover:text-accent transition-colors"
+              title="Call us"
+            >
               <Phone className="w-3 h-3 mr-1 text-accent" />
               <span>+254 711-387-303</span>
-            </div>
-            <div className="flex items-center">
+            </a>
+
+            {/* Email */}
+            <a
+              href="mailto:info.bluevisionrealtors@gmail.com"
+              className="flex items-center hover:text-accent transition-colors"
+              title="Email us"
+            >
               <Mail className="w-3 h-3 mr-1 text-accent" />
-              <span> info.bluevisionrealtors@gmail.com</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4">
+              <span>info.bluevisionrealtors@gmail.com</span>
+            </a>
+
+            {/* Location */}
             <div className="flex items-center">
               <MapPin className="w-3 h-3 mr-1 text-accent" />
-              <span>Equity Bank Building  | 1st Floor  | Kilimani</span>
+              <span>Equity Bank Building | 1st Floor | Kilimani</span>
             </div>
+          </div>
+
+          {/* WhatsApp Buttons */}
+          <div className="flex items-center space-x-2 mt-1 md:mt-0">
+            {/* Kenya WhatsApp */}
+            <a
+              href={`https://wa.me/${whatsappNumbers.ke}?text=${whatsappMessages.ke}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs transition-colors"
+              title="Chat with us on WhatsApp (Kenya)"
+            >
+              <MessageCircle className="w-3 h-3 mr-1" />
+              <span>KE WhatsApp</span>
+            </a>
+
+            {/* UK WhatsApp */}
+            <a
+              href={`https://wa.me/${whatsappNumbers.uk}?text=${whatsappMessages.uk}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs transition-colors"
+              title="Chat with us on WhatsApp (UK)"
+            >
+              <MessageCircle className="w-3 h-3 mr-1" />
+              <span>UK WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>
@@ -158,7 +208,7 @@ const NewNavbar = () => {
             {navItems.map((item) => (
               <div key={item.name} className="relative" ref={item.name === 'Services' ? dropdownRef : null}>
                 {item.dropdown ? (
-                  <div 
+                  <div
                     className="relative"
                     onMouseEnter={handleServicesHover}
                     onMouseLeave={handleServicesLeave}
@@ -177,10 +227,10 @@ const NewNavbar = () => {
                       <span>{item.name}</span>
                       <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
                     </Link>
-                    
+
                     {/* Dropdown - only shown on hover */}
                     {servicesOpen && (
-                      <div 
+                      <div
                         className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-neutral py-2 z-50"
                         onMouseEnter={handleServicesHover}
                         onMouseLeave={handleServicesLeave}
@@ -200,7 +250,7 @@ const NewNavbar = () => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`px-3 py-1.5 rounded-lg transition-colors hover:text-accent`} 
+                    className={`px-3 py-1.5 rounded-lg transition-colors hover:text-accent`}
                     style={{
                       backgroundColor: isActive(item.path) ? 'rgba(var(--accent), 0.1)' : 'transparent',
                       color: isActive(item.path) ? 'var(--accent)' : 'rgb(55, 65, 81)',
@@ -212,11 +262,11 @@ const NewNavbar = () => {
                 )}
               </div>
             ))}
-            
+
             {/* CTA Button */}
             <Link
               to="/contact"
-              className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-lg font-medium transition-colors" 
+              className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-lg font-medium transition-colors"
             >
               Get Free Consultation
             </Link>
@@ -245,7 +295,7 @@ const NewNavbar = () => {
                         className="flex items-center justify-between w-full px-4 py-3 text-gray-700 hover:text-accent hover:bg-neutral-light rounded-lg transition-colors text-left"
                       >
                         <span>{item.name}</span>
-                        <ChevronDown 
+                        <ChevronDown
                           className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -277,6 +327,32 @@ const NewNavbar = () => {
                   )}
                 </div>
               ))}
+
+              {/* Mobile WhatsApp Buttons */}
+              <div className="flex space-x-2 pt-2">
+                <a
+                  href={`https://wa.me/${whatsappNumbers.ke}?text=${whatsappMessages.ke}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
+                  title="Chat with us on WhatsApp (Kenya)"
+                >
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  <span>KE WhatsApp</span>
+                </a>
+
+                <a
+                  href={`https://wa.me/${whatsappNumbers.uk}?text=${whatsappMessages.uk}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
+                  title="Chat with us on WhatsApp (UK)"
+                >
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  <span>UK WhatsApp</span>
+                </a>
+              </div>
+
               <button
                 onClick={() => handleMobileNavClick('/contact')}
                 className="block w-full px-4 py-3 bg-accent hover:bg-accent-dark text-white rounded-lg font-medium transition-colors text-center mt-4"
