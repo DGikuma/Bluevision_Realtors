@@ -4,8 +4,6 @@ import {
   Search,
   Filter,
   MapPin,
-  Bed,
-  Bath,
   Square,
   Heart,
   Share2,
@@ -14,12 +12,10 @@ import {
   ChevronDown,
   Home,
   Building,
-  Warehouse,
   Trees,
   Globe,
   Mountain
 } from 'lucide-react';
-
 import { Link } from 'react-router-dom';
 
 const ListingsPage = () => {
@@ -36,10 +32,10 @@ const ListingsPage = () => {
       title: 'Diaspora Village Malindi',
       price: 'Kes 2.5M',
       location: 'Malindi, Kenya',
-      type: 'Gated Community',
+      type: 'village',
       landSize: '5 acres',
       description: 'Fully Gated Community with Residential & Commercial Spaces',
-      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00',
+      image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
       featured: true,
       status: 'For Sale'
     },
@@ -48,10 +44,10 @@ const ListingsPage = () => {
       title: 'Fahari Gardens Malindi',
       price: 'Kes 200,000',
       location: 'Malindi, Kenya',
-      type: 'Serviced Plots',
+      type: 'gardens',
       landSize: '50 × 100 ft',
       description: 'Fully Serviced Plots. Only 45 minutes from Malindi town.',
-      image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811',
+      image: 'https://images.unsplash.com/photo-1580216643062-cf686cacf4cc?w=800&q=80',
       featured: true,
       status: 'For Sale'
     },
@@ -60,10 +56,10 @@ const ListingsPage = () => {
       title: 'Fahari Gardens Malindi',
       price: 'Kes 600,000',
       location: 'Malindi, Kenya',
-      type: 'Serviced Plots',
+      type: 'gardens',
       landSize: '1 acre',
       description: 'Fully Serviced Plots. Only 45 minutes from Malindi town.',
-      image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
+      image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w-800&q=80',
       featured: false,
       status: 'For Sale'
     },
@@ -72,10 +68,10 @@ const ListingsPage = () => {
       title: 'Fahari Gardens Malindi',
       price: 'Kes 7M',
       location: 'Malindi, Kenya',
-      type: 'Serviced Plots',
+      type: 'gardens',
       landSize: '7 acres',
       description: 'Fully Serviced Plots. Only 45 minutes from Malindi town.',
-      image: 'https://images.unsplash.com/photo-1448630360428-65456885c650',
+      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
       featured: false,
       status: 'For Sale'
     },
@@ -84,10 +80,10 @@ const ListingsPage = () => {
       title: 'Peakview Gardens Nanyuki',
       price: 'Kes 450,000',
       location: 'Nanyuki, Kenya',
-      type: 'Serviced Plots',
+      type: 'gardens',
       landSize: '50 × 100 ft',
       description: 'Fully serviced plots with electricity. 9km from Batuk. Payable over 24 months.',
-      image: 'https://images.unsplash.com/photo-1430285561322-7808604715df',
+      image: 'https://images.unsplash.com/photo-1430285561322-7808604715df?w=800&q=80',
       featured: true,
       status: 'For Sale'
     }
@@ -100,6 +96,35 @@ const ListingsPage = () => {
     { icon: <Globe className="w-5 h-5" />, label: 'Village', value: 'village' },
     { icon: <Mountain className="w-5 h-5" />, label: 'Gardens', value: 'gardens' },
   ];
+
+  // Filter properties based on selected type
+  const filteredProperties = properties.filter(property => {
+    if (filters.type === '') return true;
+    return property.type === filters.type;
+  });
+
+  // Sort properties based on selected sort option
+  const sortedProperties = [...filteredProperties].sort((a, b) => {
+    switch (filters.sortBy) {
+      case 'price_asc':
+        return parseFloat(a.price.replace(/[^0-9.]/g, '')) - parseFloat(b.price.replace(/[^0-9.]/g, ''));
+      case 'price_desc':
+        return parseFloat(b.price.replace(/[^0-9.]/g, '')) - parseFloat(a.price.replace(/[^0-9.]/g, ''));
+      case 'newest':
+        return b.id - a.id;
+      case 'featured':
+      default:
+        return b.featured === a.featured ? 0 : b.featured ? -1 : 1;
+    }
+  });
+
+  // Function to handle filter changes
+  const handleFilterChange = (filterType: string, value: string) => {
+    setFilters(prev => ({
+      ...prev,
+      [filterType]: value
+    }));
+  };
 
   return (
     <div className="min-h-screen">
@@ -175,7 +200,7 @@ const ListingsPage = () => {
               {propertyTypes.map((type) => (
                 <button
                   key={type.value}
-                  onClick={() => setFilters({ ...filters, type: type.value })}
+                  onClick={() => handleFilterChange('type', type.value)}
                   className={`flex items-center px-4 py-2 rounded-lg border transition-colors ${filters.type === type.value
                     ? 'bg-blue-600 text-white border-blue-600'
                     : 'border-gray-300 hover:bg-gray-50'
@@ -198,12 +223,12 @@ const ListingsPage = () => {
           {/* Stats */}
           <div className="mb-8 flex justify-between items-center">
             <div>
-              <h2 className="text-2xl font-bold">{properties.length} Properties Found</h2>
-              <p className="text-gray-600">Showing 1-{properties.length} of {properties.length} results</p>
+              <h2 className="text-2xl font-bold">{sortedProperties.length} Properties Found</h2>
+              <p className="text-gray-600">Showing 1-{sortedProperties.length} of {sortedProperties.length} results</p>
             </div>
             <select
               value={filters.sortBy}
-              onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
+              onChange={(e) => handleFilterChange('sortBy', e.target.value)}
               className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
               aria-label="Sort properties by"
               title="Sort properties by"
@@ -216,9 +241,20 @@ const ListingsPage = () => {
           </div>
 
           {/* Properties */}
-          {viewMode === 'grid' ? (
+          {sortedProperties.length === 0 ? (
+            <div className="text-center py-12">
+              <h3 className="text-2xl font-bold text-gray-700 mb-4">No properties found</h3>
+              <p className="text-gray-600 mb-6">Try selecting a different filter or category</p>
+              <button
+                onClick={() => handleFilterChange('type', '')}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Clear Filters
+              </button>
+            </div>
+          ) : viewMode === 'grid' ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-              {properties.map((property) => (
+              {sortedProperties.map((property) => (
                 <div key={property.id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
                   <div className="relative h-48">
                     <img
@@ -269,7 +305,7 @@ const ListingsPage = () => {
 
                     <div className="mt-6 flex justify-between items-center">
                       <span className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium">
-                        {property.type}
+                        {propertyTypes.find(t => t.value === property.type)?.label || property.type}
                       </span>
                       <Link
                         to={`/listings/${property.id}`}
@@ -286,7 +322,7 @@ const ListingsPage = () => {
             </div>
           ) : (
             <div className="space-y-6">
-              {properties.map((property) => (
+              {sortedProperties.map((property) => (
                 <div key={property.id} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                   <div className="flex flex-col md:flex-row gap-6">
                     <div className="md:w-64 h-48 relative flex-shrink-0">
@@ -328,7 +364,7 @@ const ListingsPage = () => {
                             <span className="font-medium">{property.landSize}</span>
                           </div>
                           <span className="px-3 py-1 bg-gray-100 rounded-full font-medium">
-                            {property.type}
+                            {propertyTypes.find(t => t.value === property.type)?.label || property.type}
                           </span>
                         </div>
 
