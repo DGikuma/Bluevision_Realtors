@@ -3,6 +3,7 @@ import HomePage from '@/pages/HomePage';
 import AboutPage from '@/pages/AboutPage';
 import ServicesPage from '@/pages/ServicesPage';
 import ListingsPage from '@/pages/ListingsPage';
+import PropertyDetailsPage from '@/pages/PropertyDetailsPage';
 import AgentsPage from '@/pages/AgentsPage';
 import ContactPage from '@/pages/ContactPage';
 import BlogPage from '@/pages/BlogPage';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/listings" element={<ListingsPage />} />
+        <Route path="/listings/:id" element={<PropertyDetailsPage />} />
         <Route path="/agents" element={<AgentsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/blog" element={<BlogPage />} />
